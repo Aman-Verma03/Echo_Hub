@@ -9,6 +9,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.viewpager2.widget.ViewPager2
+import com.example.echohub.adapters.VPAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -16,6 +21,11 @@ import com.google.firebase.auth.auth
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var auth:FirebaseAuth
+    private lateinit var fabTweet:FloatingActionButton
+    private lateinit var vpAdapter:VPAdapter
+    private lateinit var viewPager:ViewPager2
+    private lateinit var tabLayout: TabLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,6 +36,22 @@ class HomeActivity : AppCompatActivity() {
             insets
         }
         init()
+
+        TabLayoutMediator(tabLayout,viewPager){tab:TabLayout.Tab,position:Int->
+            when(position){
+                0->{
+                    tab.text="Accounts"
+                }else->{
+                    tab.text="Tweets"
+                }
+            }
+        }.attach()
+
+        fabTweet.setOnClickListener{
+            val intent=Intent(this,TweetActivity::class.java)
+            startActivity(intent)
+
+        }
     }
 
 
@@ -46,7 +72,8 @@ class HomeActivity : AppCompatActivity() {
                 finish()
             }else -> {
 //                Profile
-                Toast.makeText(this,"Profile Pressed" ,Toast.LENGTH_SHORT).show()
+                val intent=Intent(this,ProfileActivity::class.java)
+                startActivity(intent)
             }
         }
         return true
@@ -54,5 +81,10 @@ class HomeActivity : AppCompatActivity() {
 
     private fun init(){
         auth=Firebase.auth
+        fabTweet=findViewById(R.id.fab_tweet)
+        vpAdapter=VPAdapter(this)
+        viewPager=findViewById(R.id.view_pager)
+        viewPager.adapter=vpAdapter
+        tabLayout=findViewById(R.id.tab_layout)
     }
 }
