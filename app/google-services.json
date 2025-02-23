@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "176388252798",
+    "project_id": "echohub-52bdb",
+    "storage_bucket": "echohub-52bdb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176388252798:android:d3a50f6a35836eef52642f",
+        "android_client_info": {
+          "package_name": "com.example.echohub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzrRsh1IDLo41H-0D01L0XSa8SJy7yEQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
